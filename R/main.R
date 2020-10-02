@@ -2,6 +2,7 @@ library(jsonlite)
 library(shiny)
 library(shinythemes)
 library(ggplot2)
+library(httr)
 
 
 api_key = "AP643htGoOq3MVvE72ypY7B0Q5hsnfeln7ocXHWP"
@@ -9,10 +10,21 @@ mars_weather_url = paste0("https://api.nasa.gov/insight_weather/?api_key=", api_
 
 
 get_data <- function(endpoint) {
-  response <- fromJSON(endpoint)
+  if (is.character(endpoint)) {
+    response = GET(endpoint)
+    json = content(response, as = "text")
+    result = fromJSON(json)
+    return (list("response"= response, "data"= result))
+  }
+  else {
+    stop("endpoint needs to be of type character!")
+  }
 }
 
-data = get_data(mars_weather_url)
+result = get_data(mars_weather_url)
+data = result$data
+response = result$response
+
 temp_av <- c()
 temp_min <- c()
 temp_max <- c()
