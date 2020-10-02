@@ -3,6 +3,9 @@ context("marsweather")
 api_key = "AP643htGoOq3MVvE72ypY7B0Q5hsnfeln7ocXHWP"
 mars_weather_url = paste0("https://api.nasa.gov/insight_weather/?api_key=", api_key, "&feedtype=json&ver=1.0")
 
+result = get_data(mars_weather_url)
+data = result$data
+
 test_that("Endpoint parameter needs to be of type character", {
   expect_error(get_data(12345))
 })
@@ -37,9 +40,5 @@ test_that("All data points contain required fields", {
   }
 })
 
-test_that(" 7 data points are returned", {
-  number_sol_keys = length(get_data(mars_weather_url)[["data"]][["sol_keys"]])
-  expect_true(as.integer(number_sol_keys) >= 7)
-})
 
 
