@@ -8,7 +8,7 @@ mars_weather_url = paste0("https://api.nasa.gov/insight_weather/?api_key=", api_
 
 result = get_data(mars_weather_url)
 data = result$data
-response = result$response
+frame = transform_data(data)
 
 ui <- fluidPage(
   theme = shinytheme("lumen"),
