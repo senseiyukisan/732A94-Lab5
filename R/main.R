@@ -20,7 +20,7 @@ temp_max <- c()
 ws_av <- c()
 ws_min <- c()
 ws_max <- c()
-ws_dir <- c()
+# ws_dir <- c()
 
 press_av <- c()
 press_min <- c()
@@ -77,12 +77,17 @@ ui <- fluidPage(
 # Define server function
 server <- function(input, output) {
   output$lineplot <- renderPlot({
-    ggplot(frame, aes(x=days, group = 1)) + 
-      geom_line(aes(y = .data[[paste0("av.", input$selected)]]), color = "green") + 
-      geom_line(aes(y = .data[[paste0("min.", input$selected)]]), color="blue") +
-      geom_line(aes(y = .data[[paste0("max.", input$selected)]]), color="red")
+    # ggplot(y_fin, aes(x= frame[["days"]], group = 1), size = 1.5) +
+    ggplot(frame, aes(x=days, group = input$selected)) +
+      geom_line(aes(y = .data[[paste0("av.", input$selected)]], x=days, colour = "green")) +
+      geom_line(aes(y = .data[[paste0("min.", input$selected)]], x=days, colour="blue")) +
+      geom_line(aes(y = .data[[paste0("max.", input$selected)]], x=days, colour="red"))+
+      scale_color_manual(name = input$selected, labels = c("minimum", "average", "maximum"), values = c("blue","green","red"))+
+      ylab(input$selected)+
+      xlab("Sol days")
     })
 }
+
 
 # Create Shiny object
 shinyApp(ui = ui, server = server)
