@@ -1,3 +1,4 @@
+library(httr)
 context("marsweather")
 
 api_key = "AP643htGoOq3MVvE72ypY7B0Q5hsnfeln7ocXHWP"
