@@ -1,0 +1,38 @@
+---
+title: "my-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(marsweather)
+```
+
+# Package Information
+
+This package contains a Shiny app that provides the user with weather data from Mars in the past 7 martian (Sol) days.
+
+# main.R
+
+This script transforms the data into an acceptable format from the API
+
+# Shiny app
+
+In order to run the app, the user must use the following code:
+
+```{r , eval=FALSE}
+devtools::install_github("senseiyukisan/732A94-Lab5")
+
+```
+
+The user may then choose to observe the temperature, pressure or windspeed on Mars in the past 7 martian days. The minimum, average and maximum values of those measurements on those days are indicated on the graph.
